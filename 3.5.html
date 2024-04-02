@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Column Bar Chart from CSV File</title>
+<style>
+    canvas {
+        border: 1px solid #000;
+    }
+</style>
+</head>
+<body>
+<canvas id="barChartCanvas" width="600" height="400"></canvas>
+<script>
+    // Function to fetch data from CSV file
+    function fetchDataAndDraw() {
+        fetch('data.csv') // Replace 'sales_data.csv' with the path to your CSV file
+        .then(response => response.text())
+        .then(data => {
+            // Split the CSV data into rows
+            var rows = data.trim().split('\n');
+            var labels = [];
+            var values = [];
+
+            // Extract labels and values
+            for (var i = 1; i < rows.length; i++) {
+                var row = rows[i].split(',');
+                labels.push(row[1]); // Assuming the second column contains product names
+                values.push(parseFloat(row[5])); // Assuming the sixth column contains total revenue
+            }
+
+            // Get canvas element and context
+            var canvas = document.getElementById('barChartCanvas');
+            var ctx = canvas.getContext('2d');
+
+            // Define chart parameters
+            var chartWidth = canvas.width - 100;
+            var chartHeight = canvas.height - 100;
+            var barWidth = 40;
+            var spacing = 20;
+            var maxValue = Math.max(...values);
+            var scaleFactor = chartHeight / maxValue;
+
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw bars
+            var startX = 50;
+            var startY = canvas.height - 50;
+            var barColor = 'blue';
+            ctx.fillStyle = barColor;
+            for (var i = 0; i < values.length; i++) {
+                var barHeight = values[i] * scaleFactor;
+                ctx.fillRect(startX + (barWidth + spacing) * i, startY - barHeight, barWidth, barHeight);
+            }
+
+            // Draw labels
+            ctx.fillStyle = 'black';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            for (var i = 0; i < labels.length; i++) {
+                ctx.fillText(labels[i], startX + (barWidth + spacing) * i + barWidth / 2, startY + 10);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+    }
+
+    // Call the function when the page loads
+    window.onload = fetchDataAndDraw;
+</script>
+</body>
+</html>

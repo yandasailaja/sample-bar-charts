@@ -1,0 +1,19 @@
+Date,Product,Category,Quantity,Unit Price,Total Revenue
+2024-04-01,Laptop,Electronics,10,1500,15000
+2024-04-01,Smartphone,Electronics,20,400,8000
+2024-04-02,Laptop,Electronics,15,1066.67,16000
+2024-04-02,Tablet,Electronics,5,1000,5000
+2024-04-03,Smartphone,Electronics,25,400,10000
+2024-04-03,Tablet,Electronics,10,700,7000
+2024-04-04,Headphones,Electronics,30,200,6000
+2024-04-04,Keyboard,Electronics,20,150,3000
+2024-04-05,Monitor,Electronics,10,800,8000
+2024-04-05,Mouse,Electronics,15,50,750
+2024-04-06,Printer,Electronics,5,300,1500
+2024-04-06,Scanner,Electronics,8,200,1600
+2024-04-07,Chair,Furniture,12,500,6000
+2024-04-07,Desk,Furniture,8,700,5600
+2024-04-08,Sofa,Furniture,5,1200,6000
+2024-04-08,Table,Furniture,10,800,8000
+2024-04-09,Bed,Furniture,3,1500,4500
+2024-04-09,Wardrobe,Furniture,6,1000,6000

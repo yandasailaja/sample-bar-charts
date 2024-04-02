@@ -1,0 +1,7 @@
+Date, Product, Quantity, Revenue
+2024-04-01, Laptop, 10, 15000
+2024-04-01, Smartphone, 20, 8000
+2024-04-02, Laptop, 15, 16000
+2024-04-02, Tablet, 5, 5000
+2024-04-03, Smartphone, 25, 10000
+2024-04-03, Tablet, 10, 7000

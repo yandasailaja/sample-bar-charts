@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Bar Chart</title>
+<style>
+    canvas {
+        border: 1px solid #000;
+    }
+</style>
+</head>
+<body>
+<canvas id="barChartCanvas" width="400" height="300"></canvas>
+<script>
+    // Function to fetch data from text file
+    function fetchDataAndDraw() {
+        fetch('data.txt') // Replace 'data.txt' with the path to your text file
+        .then(response => response.text())
+        .then(data => {
+            // Split the text data into rows
+            var rows = data.trim().split('\n');
+            var values = [];
+
+            // Extract values
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i].split(',');
+                values.push(parseInt(row[1])); // Assuming the second column contains numerical values
+            }
+
+            // Get canvas element and context
+            var canvas = document.getElementById('barChartCanvas');
+            var ctx = canvas.getContext('2d');
+
+            // Define chart parameters
+            var chartWidth = canvas.width - 100;
+            var chartHeight = canvas.height - 100;
+            var barWidth = 30;
+            var spacing = 20;
+            var maxValue = Math.max(...values);
+            var scaleFactor = chartHeight / maxValue;
+
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw bars
+            var startX = 50;
+            var startY = canvas.height - 50;
+            ctx.fillStyle = 'blue';
+            for (var i = 0; i < values.length; i++) {
+                var barHeight = values[i] * scaleFactor;
+                ctx.fillRect(startX + (barWidth + spacing) * i, startY - barHeight, barWidth, barHeight);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+    }
+
+    // Call the function when the page loads
+    window.onload = fetchDataAndDraw;
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bar Chart</title>
+<style>
+    canvas {
+        border: 1px solid black;
+    }
+</style>
+</head>
+<body>
+<canvas id="barChart" width="400" height="300"></canvas>
+
+<script>
+    // Get the canvas element
+    var canvas = document.getElementById('barChart');
+    var ctx = canvas.getContext('2d');
+
+    // Data for the chart
+    var data = [20, 50, 30, 70, 40];
+
+    // Configuration
+    var barWidth = 40;
+    var barSpacing = 20;
+    var startX = 50;
+    var startY = canvas.height - 50;
+    var maxValue = Math.max(...data);
+    var scaleFactor = canvas.height / maxValue;
+
+    // Drawing the bars
+    for (var i = 0; i < data.length; i++) {
+        var barHeight = data[i] * scaleFactor;
+        var x = startX + (barWidth + barSpacing) * i;
+        var y = startY - barHeight;
+        ctx.fillRect(x, y, barWidth, barHeight);
+    }
+
+    // Drawing the axes
+    ctx.beginPath();
+    ctx.moveTo(startX - 10, startY);
+    ctx.lineTo(canvas.width - 20, startY);
+    ctx.moveTo(startX, startY + 10);
+    ctx.lineTo(startX, 10);
+    ctx.stroke();
+</script>
+</body>
+</html>
